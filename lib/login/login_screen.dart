@@ -42,14 +42,14 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 30),
-                      defultTextField(
+                      defaultTextField(
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         prefix: Icons.email,
                         label: 'Email',
                       ),
                       SizedBox(height: 10),
-                      defultPasswordField(
+                      defaultPasswordField(
                           controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
                           prefix: Icons.lock,
@@ -93,7 +93,7 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
       );
-  Widget defultTextField({
+  Widget defaultTextField({
     required TextEditingController controller,
     required TextInputType keyboardType,
     required IconData prefix,
@@ -142,7 +142,7 @@ class LoginScreen extends StatelessWidget {
           );
         },
       );
-  Widget defultPasswordField({
+  Widget defaultPasswordField({
     required TextEditingController controller,
     required TextInputType keyboardType,
     required IconData prefix,
@@ -155,6 +155,7 @@ class LoginScreen extends StatelessWidget {
       BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {},
         builder: (context, state) {
+          var cubit = LoginCubit.get(context);
           return TextFormField(
             controller: controller,
             keyboardType: TextInputType.emailAddress,
@@ -175,22 +176,25 @@ class LoginScreen extends StatelessWidget {
               }
             },
             onTap: () async {
-              LoginCubit.get(context).enteredPasswordField();
+              cubit.enteredPasswordField();
               for (int i = 0; i < 6; i++) {
                 await Future.delayed(const Duration(milliseconds: 100))
                     .then((value) {
-                  LoginCubit.get(context).increaseIndex();
+                  cubit.increaseIndex();
                 });
               }
             },
             onEditingComplete: () {
               FocusManager.instance.primaryFocus?.unfocus();
-              LoginCubit.get(context).leavePasswordField();
+              cubit.leavePasswordField();
               print('object');
               for (int i = 0; i < 7; i++) {
-                Future.delayed(const Duration(milliseconds: 150)).then((value) {
-                  LoginCubit.get(context).decreaseIndex();
+                Future.delayed(const Duration(milliseconds: 200)).then((value) {
+                  cubit.decreaseIndex();
                 });
+              }
+              if (emailController.text.isEmpty) {
+                cubit.cureentIndex = 0;
               }
             },
           );
