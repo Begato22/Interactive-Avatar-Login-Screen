@@ -1,5 +1,4 @@
 import 'package:animation_login/login/cubit/states.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
@@ -45,7 +44,7 @@ class LoginCubit extends Cubit<LoginStates> {
     'assets/images/33.jpg',
   ];
 
-  int cureentIndex = 0;
+  int currentIndex = 0;
 
   bool isVisiable = true;
 
@@ -60,20 +59,20 @@ class LoginCubit extends Cubit<LoginStates> {
   }
 
   void increaseIndex() {
-    cureentIndex++;
+    currentIndex++;
 
     emit(LoginIncreaseIndexState());
   }
 
   void decreaseIndex() {
-    if (cureentIndex != 0) {
-      cureentIndex--;
+    if (currentIndex != 0) {
+      currentIndex--;
     }
     emit(LoginDecreaseIndexState());
   }
 
   void enteredPasswordField() {
-    cureentIndex = 25;
+    currentIndex = 25;
 
     emit(LoginEnterPasswordFieldState());
   }

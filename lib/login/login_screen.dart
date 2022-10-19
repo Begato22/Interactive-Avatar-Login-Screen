@@ -1,8 +1,6 @@
 import 'package:animation_login/login/cubit/cubit.dart';
 import 'package:animation_login/login/cubit/states.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -28,7 +26,7 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Center(
                         child: CircleAvatar(
                           backgroundColor: Colors.teal,
@@ -36,19 +34,19 @@ class LoginScreen extends StatelessWidget {
                           child: CircleAvatar(
                             radius: 70,
                             backgroundImage:
-                                Image.asset(cubit.imageList[cubit.cureentIndex])
+                                Image.asset(cubit.imageList[cubit.currentIndex])
                                     .image,
                           ),
                         ),
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       defaultTextField(
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         prefix: Icons.email,
                         label: 'Email',
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       defaultPasswordField(
                           controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
@@ -127,14 +125,14 @@ class LoginScreen extends StatelessWidget {
             },
             onChanged: (value) {
               print(value.length);
-              print(LoginCubit.get(context).cureentIndex);
-              if (value.length > LoginCubit.get(context).cureentIndex) {
-                if (LoginCubit.get(context).cureentIndex != 24) {
+              print(LoginCubit.get(context).currentIndex);
+              if (value.length > LoginCubit.get(context).currentIndex) {
+                if (LoginCubit.get(context).currentIndex != 24) {
                   LoginCubit.get(context).increaseIndex();
                 }
               } else {
                 if (emailController.text.length == 0) {
-                  LoginCubit.get(context).cureentIndex = 0;
+                  LoginCubit.get(context).currentIndex = 0;
                 }
                 LoginCubit.get(context).decreaseIndex();
               }
@@ -194,7 +192,7 @@ class LoginScreen extends StatelessWidget {
                 });
               }
               if (emailController.text.isEmpty) {
-                cubit.cureentIndex = 0;
+                cubit.currentIndex = 0;
               }
             },
           );
