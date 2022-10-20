@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:animation_login/login/cubit/cubit.dart';
 import 'package:animation_login/login/cubit/states.dart';
 import 'package:flutter/material.dart';
@@ -52,15 +54,15 @@ class LoginScreen extends StatelessWidget {
                           keyboardType: TextInputType.visiblePassword,
                           prefix: Icons.lock,
                           label: 'Password',
-                          suffix: cubit.isVisiable
+                          suffix: cubit.isVisitable
                               ? Icons.visibility
                               : Icons.visibility_off,
                           suffixFunc: () {
-                            cubit.changeVisivility();
+                            cubit.changeVisibility();
                           },
-                          obscureText: cubit.isVisiable),
-                      SizedBox(height: 10),
-                      defultButton(onPressed: () {}, lable: 'login')
+                          obscureText: cubit.isVisitable),
+                      const SizedBox(height: 10),
+                      defaultButton(onPressed: () {}, label: 'login')
                     ],
                   ),
                 ),
@@ -72,9 +74,9 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget defultButton({
+  Widget defaultButton({
     required Function onPressed,
-    required String lable,
+    required String label,
     bool isDisabled = false,
     Color color = Colors.teal,
   }) =>
@@ -87,7 +89,7 @@ class LoginScreen extends StatelessWidget {
             backgroundColor: isDisabled ? Colors.grey : Colors.teal,
           ),
           child: Text(
-            lable.toUpperCase(),
+            label.toUpperCase(),
           ),
         ),
       );
@@ -122,6 +124,7 @@ class LoginScreen extends StatelessWidget {
               if (val!.isEmpty) {
                 return 'you must add $label';
               }
+              return null;
             },
             onChanged: (value) {
               print(value.length);
@@ -131,7 +134,7 @@ class LoginScreen extends StatelessWidget {
                   LoginCubit.get(context).increaseIndex();
                 }
               } else {
-                if (emailController.text.length == 0) {
+                if (emailController.text.isEmpty) {
                   LoginCubit.get(context).currentIndex = 0;
                 }
                 LoginCubit.get(context).decreaseIndex();
@@ -172,6 +175,7 @@ class LoginScreen extends StatelessWidget {
               if (val!.isEmpty) {
                 return 'you must add $label';
               }
+              return null;
             },
             onTap: () async {
               cubit.enteredPasswordField();

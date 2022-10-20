@@ -46,11 +46,11 @@ class LoginCubit extends Cubit<LoginStates> {
 
   int currentIndex = 0;
 
-  bool isVisiable = true;
+  bool isVisitable = true;
 
-  void changeVisivility() {
-    isVisiable = !isVisiable;
-    if (isVisiable) {
+  void changeVisibility() {
+    isVisitable = !isVisitable;
+    if (isVisitable) {
       decreaseIndex();
     } else {
       increaseIndex();
