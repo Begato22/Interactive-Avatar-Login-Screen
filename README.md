@@ -1,3 +1,4 @@
+![header-line-removebg-preview](https://github.com/user-attachments/assets/b783cffd-3341-4b04-be2b-bb164897b2c6)
 
 
 # Interactive Avatar Login Screen 👽
@@ -24,6 +25,7 @@ This Flutter project features an **Interactive Avatar Login Screen** designed fo
 3. Enter your email and password in the provided text fields.
 4. Enjoy with this fantastic experience.
 
+![footerr-line-removebg-preview](https://github.com/user-attachments/assets/9a9b28c0-9c60-4bb9-8938-4b254a2b1419)
 
 
 
