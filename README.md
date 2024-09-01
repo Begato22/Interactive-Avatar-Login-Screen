@@ -1,4 +1,6 @@
-# Interactive Avatar Login Screen
+# Interactive Avatar Login Screen 👽
+
+## It is Just for fun 😄
 
 This Flutter project features an **Interactive Avatar Login Screen** designed for mobile applications. The screen showcases an avatar that dynamically responds to user interactions, providing a visually engaging and intuitive login experience.
 
