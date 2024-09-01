@@ -1,3 +1,5 @@
+<div style="width:100% height:50px" border-radius-top: "1px solid black" background-color:"red" </dive>
+
 # Interactive Avatar Login Screen 👽
 
 ## It is Just for fun 😄
