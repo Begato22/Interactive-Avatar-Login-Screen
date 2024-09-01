@@ -1,8 +1,8 @@
-<!-- GitHub README format -->
-
-<div style="width: 100%; height: 50px; background-color: teal; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-  # Interactive Avatar Login Screen 👽
-</div>
+<table>
+  <tr>
+    <td style="width: 100%; height: 50px; background-color: teal; border-top-left-radius: 10px; border-top-right-radius: 10px;"></td>
+  </tr>
+</table>
 
 # Interactive Avatar Login Screen 👽
 
