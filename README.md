@@ -2,8 +2,10 @@
 
 This Flutter project features an **Interactive Avatar Login Screen** designed for mobile applications. The screen showcases an avatar that dynamically responds to user interactions, providing a visually engaging and intuitive login experience.
 
-## Screenshots
-![Android Emulator - Resizable_Experimental_API_33_5554 2024-09-01 20-52-30](https://github.com/user-attachments/assets/d27c4915-8746-44ec-9bce-ab434df6f9c8)
+<p align="center">
+  <img src="assets/screenshoot/av.gif" width="300"  height="700" alt="Avatar Animation">
+  <img src="screenshots/login_screen.png" width="300" alt="Login Screen">
+</p>
 
 
 ## Features
