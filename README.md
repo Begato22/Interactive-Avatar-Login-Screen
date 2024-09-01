@@ -4,7 +4,6 @@ This Flutter project features an **Interactive Avatar Login Screen** designed fo
 
 <p align="center">
   <img src="assets/screenshoot/av.gif" width="300"  height="700" alt="Avatar Animation">
-  <img src="screenshots/login_screen.png" width="300" alt="Login Screen">
 </p>
 
 
