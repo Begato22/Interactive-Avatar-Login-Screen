@@ -1,6 +1,9 @@
+<p align="center">
 <div style="width: 200px; height: 100px; background-color: red; border-top-left-radius: 10px; border-top-right-radius: 10px;">
     <!-- Content goes here -->
 </div>
+</p>
+
 
 # Interactive Avatar Login Screen 👽
 
