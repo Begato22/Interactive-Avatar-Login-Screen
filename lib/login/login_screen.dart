@@ -5,72 +5,76 @@ import 'package:animation_login/login/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  late LoginCubit _cubit;
+
+  @override
+  void initState() {
+    _cubit = BlocProvider.of<LoginCubit>(context);
+    _cubit.init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginCubit(),
-      child: BlocConsumer<LoginCubit, LoginStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          var cubit = LoginCubit.get(context);
-          return Scaffold(
-            body: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20),
-                      Center(
-                        child: CircleAvatar(
-                          backgroundColor: Colors.teal,
-                          radius: 72,
-                          child: CircleAvatar(
-                            radius: 70,
-                            backgroundImage:
-                                Image.asset(cubit.imageList[cubit.currentIndex])
-                                    .image,
+    return BlocConsumer<LoginCubit, LoginStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return Scaffold(
+          body: Center(
+            child: _cubit.motionList.isEmpty
+                ? const CircularProgressIndicator()
+                : Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 20),
+                          Center(
+                            child: CircleAvatar(
+                              backgroundColor: Colors.teal,
+                              radius: 72,
+                              child: CircleAvatar(
+                                radius: 70,
+                                backgroundImage: _cubit.motionList[_cubit.currentIndex]?.image,
+                              ),
+                            ),
                           ),
-                        ),
+                          const SizedBox(height: 30),
+                          defaultTextField(
+                            controller: _cubit.emailController,
+                            keyboardType: TextInputType.emailAddress,
+                            prefix: Icons.email,
+                            label: 'Email',
+                          ),
+                          const SizedBox(height: 10),
+                          defaultPasswordField(
+                            controller: _cubit.passwordController,
+                            keyboardType: TextInputType.visiblePassword,
+                            prefix: Icons.lock,
+                            label: 'Password',
+                            suffix: _cubit.isVisitable ? Icons.visibility : Icons.visibility_off,
+                            suffixFunc: () => _cubit.changeVisibility(),
+                            obscureText: _cubit.isVisitable,
+                          ),
+                          const SizedBox(height: 10),
+                          defaultButton(onPressed: () async => await _cubit.reset(), label: 'login')
+                        ],
                       ),
-                      const SizedBox(height: 30),
-                      defaultTextField(
-                        controller: emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        prefix: Icons.email,
-                        label: 'Email',
-                      ),
-                      const SizedBox(height: 10),
-                      defaultPasswordField(
-                          controller: passwordController,
-                          keyboardType: TextInputType.visiblePassword,
-                          prefix: Icons.lock,
-                          label: 'Password',
-                          suffix: cubit.isVisitable
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          suffixFunc: () {
-                            cubit.changeVisibility();
-                          },
-                          obscureText: cubit.isVisitable),
-                      const SizedBox(height: 10),
-                      defaultButton(onPressed: () {}, label: 'login')
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -85,21 +89,17 @@ class LoginScreen extends StatelessWidget {
         height: 40.0,
         child: ElevatedButton(
           onPressed: () => isDisabled ? null : onPressed(),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: isDisabled ? Colors.grey : Colors.teal,
-          ),
-          child: Text(
-            label.toUpperCase(),
-          ),
+          style: ElevatedButton.styleFrom(backgroundColor: isDisabled ? Colors.grey : Colors.teal),
+          child: Text(label.toUpperCase()),
         ),
       );
+
   Widget defaultTextField({
     required TextEditingController controller,
     required TextInputType keyboardType,
     required IconData prefix,
     IconData? suffix,
     Function? suffixFunc,
-    //  String? validator,
     required String label,
     bool obscureText = false,
   }) =>
@@ -110,53 +110,36 @@ class LoginScreen extends StatelessWidget {
             controller: controller,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-              prefixIcon: Icon(prefix),
-              suffixIcon: GestureDetector(
-                child: Icon(suffix),
-                onTap: () => suffixFunc!(),
-              ),
               label: Text(label),
-              border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              prefixIcon: Icon(prefix),
+              suffixIcon: GestureDetector(child: Icon(suffix), onTap: () => suffixFunc!()),
+              border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
             ),
             obscureText: obscureText,
+            onTap: () => _cubit.onEmailTapped(),
             validator: (val) {
               if (val!.isEmpty) {
                 return 'you must add $label';
               }
               return null;
             },
-            onChanged: (value) {
-              print(value.length);
-              print(LoginCubit.get(context).currentIndex);
-              if (value.length > LoginCubit.get(context).currentIndex) {
-                if (LoginCubit.get(context).currentIndex != 24) {
-                  LoginCubit.get(context).increaseIndex();
-                }
-              } else {
-                if (emailController.text.isEmpty) {
-                  LoginCubit.get(context).currentIndex = 0;
-                }
-                LoginCubit.get(context).decreaseIndex();
-              }
-            },
+            onChanged: (value) => _cubit.onEmailChanged(value),
           );
         },
       );
+
   Widget defaultPasswordField({
     required TextEditingController controller,
     required TextInputType keyboardType,
     required IconData prefix,
     IconData? suffix,
     Function? suffixFunc,
-    //  String? validator,
     required String label,
     bool obscureText = false,
   }) =>
       BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          var cubit = LoginCubit.get(context);
           return TextFormField(
             controller: controller,
             keyboardType: TextInputType.emailAddress,
@@ -167,8 +150,7 @@ class LoginScreen extends StatelessWidget {
                 onTap: () => suffixFunc!(),
               ),
               label: Text(label),
-              border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
             ),
             obscureText: obscureText,
             validator: (val) {
@@ -177,26 +159,17 @@ class LoginScreen extends StatelessWidget {
               }
               return null;
             },
-            onTap: () async {
-              cubit.enteredPasswordField();
-              for (int i = 0; i < 6; i++) {
-                await Future.delayed(const Duration(milliseconds: 100))
-                    .then((value) {
-                  cubit.increaseIndex();
-                });
-              }
-            },
+            onTap: () async => await _cubit.onPasswordTapped(),
             onEditingComplete: () {
               FocusManager.instance.primaryFocus?.unfocus();
-              cubit.leavePasswordField();
-              print('object');
+              _cubit.leavePasswordField();
               for (int i = 0; i < 7; i++) {
                 Future.delayed(const Duration(milliseconds: 200)).then((value) {
-                  cubit.decreaseIndex();
+                  _cubit.decreaseIndex();
                 });
               }
-              if (emailController.text.isEmpty) {
-                cubit.currentIndex = 0;
+              if (_cubit.emailController.text.isEmpty) {
+                _cubit.currentIndex = 0;
               }
             },
           );
