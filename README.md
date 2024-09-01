@@ -1,4 +1,6 @@
-<div style="width:100% height:50px" border-radius-top: "1px solid black" background-color:"red" </dive>
+<div style="width: 100%; height: 50px; background-color: red; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+    <!-- Content goes here -->
+</div>
 
 # Interactive Avatar Login Screen 👽
 
