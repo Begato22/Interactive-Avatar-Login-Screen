@@ -1,9 +1,6 @@
-<p align="center">
-<div style="width: 200px; height: 100px; background-color: red; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-    <!-- Content goes here -->
-</div>
-</p>
+<!-- GitHub README format -->
 
+<div style="width: 100%; height: 50px; background-color: teal; border-top-left-radius: 10px; border-top-right-radius: 10px;"></div>
 
 # Interactive Avatar Login Screen 👽
 
