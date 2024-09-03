@@ -1,4 +1,4 @@
-import 'package:animation_login/login/cubit/cubit.dart';
+import 'package:animation_login/login/cubit.dart';
 import 'package:animation_login/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
