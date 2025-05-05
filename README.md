@@ -1,9 +1,15 @@
-# Interactive Avatar Login Screen
+![header-line-removebg-preview](https://github.com/user-attachments/assets/b783cffd-3341-4b04-be2b-bb164897b2c6)
+
+
+# Interactive Avatar Login Screen 👽
+
+## It is Just for fun 😄
 
 This Flutter project features an **Interactive Avatar Login Screen** designed for mobile applications. The screen showcases an avatar that dynamically responds to user interactions, providing a visually engaging and intuitive login experience.
 
-## Screenshots
-![Android Emulator - Resizable_Experimental_API_33_5554 2024-09-01 20-52-30](https://github.com/user-attachments/assets/d27c4915-8746-44ec-9bce-ab434df6f9c8)
+<p align="center">
+  <img src="assets/screenshoot/av.gif" width="300"  height="700" alt="Avatar Animation">
+</p>
 
 
 ## Features
@@ -19,6 +25,7 @@ This Flutter project features an **Interactive Avatar Login Screen** designed fo
 3. Enter your email and password in the provided text fields.
 4. Enjoy with this fantastic experience.
 
+![footerr-line-removebg-preview](https://github.com/user-attachments/assets/9a9b28c0-9c60-4bb9-8938-4b254a2b1419)
 
 
 
